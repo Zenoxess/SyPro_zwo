@@ -15,7 +15,7 @@ global Start					; make our main label visible to the linker
 section .data 
 
 	title db "hello",0
-	message db "hello world",0
+	message db "fick world",0
 	stra db "Number is %d", 10, 0   ; endline, null terminator
 	strb db "Hello World! Number=%d", 10, 0   ; endline, null terminator
 	
@@ -40,7 +40,7 @@ Start:
 	pop rax
 	
 	
-	sub rsp, 40	call ExitProcess
-	add rsp, 40
+	mov rcx, 0      ; Exit-Code 0 (bedeutet "erfolgreich")
+	call ExitProcess
 
 	ret							; can be ommitted
