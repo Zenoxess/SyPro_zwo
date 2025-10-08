@@ -1,0 +1,84 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build hello (32-bit)",
+            "type": "shell",
+            "command": "./nasm.exe",
+            "args": [
+                "-f",
+                "win32",
+                "hello.asm",
+                "-o",
+                "hello.obj"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "group": "build",
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "link hello (32-bit)",
+            "type": "shell",
+            "command": "./GoLink.exe",
+            "args": [
+                "hello.obj",
+                "/entry",
+                "_start",
+                "/console"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "group": "build",
+            "dependsOn": "build hello (32-bit)",
+            "problemMatcher": []
+        },
+        {
+            "label": "build hello64 (64-bit)",
+            "type": "shell",
+            "command": "./nasm.exe",
+            "args": [
+                "-f",
+                "win64",
+                "hello64.asm",
+                "-o",
+                "hello64.obj"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "link hello64 (64-bit)",
+            "type": "shell",
+            "command": "./GoLink.exe",
+            "args": [
+                "hello64.obj",
+                "/entry",
+                "Start",
+                "/console"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "group": "build",
+            "dependsOn": "build hello64 (64-bit)",
+            "problemMatcher": []
+        }
+    ]
+}
