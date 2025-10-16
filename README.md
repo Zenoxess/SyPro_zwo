@@ -1,6 +1,6 @@
 # Assembly "Hallo Welt" für Windows x64
 
-Dieses Repository enthält ein kleines "Hallo Welt"-Programm, geschrieben in 64-Bit Assembly (NASM) für Windows. Es ist so konfiguriert, dass es direkt aus Visual Studio Code heraus kompiliert und ausgeführt werden kann, ohne dass zusätzliche Abhängigkeiten wie Visual Studio oder MSVC++ Build Tools erforderlich sind.
+Dieses Repository enthält ein kleines "Hallo Welt"-Programm, geschrieben in 64-Bit Assembly (NASM) für Windows. Es ist so konfiguriert, dass es direkt aus Visual Studio Code heraus kompiliert und ausgeführt werden kann, ohne dass zusätzliche Abhängigkeiten wie Visual Studio oder die MSVC++ Build Tools erforderlich sind.
 
 ## 🚀 Erste Schritte: Vom ZIP zum lauffähigen Code
 
@@ -12,16 +12,16 @@ Stelle sicher, dass du [Visual Studio Code](https://code.visualstudio.com/) inst
 
 ### 2. Projekt öffnen
 
-1.  Klone dieses Repository oder lade es als ZIP-Datei herunter und entpacke es.
-2.  Öffne Visual Studio Code.
-3.  Gehe zu `Datei > Ordner öffnen...` und wähle den `nasm-nonvc`-Ordner aus.
+1. Klone dieses Repository oder lade es als ZIP-Datei herunter und entpacke es.
+2. Öffne Visual Studio Code.
+3. Gehe zu `Datei > Ordner öffnen...` und wähle den Projektordner aus.
 
 ### 3. Kompilieren und Ausführen
 
 Das Projekt ist mit einem vordefinierten VS Code Task ausgestattet, der den gesamten Build-Prozess automatisiert.
 
-1.  Öffne die Datei `hello64.asm`, um den Quellcode anzuzeigen.
-2.  Drücke die Tastenkombination **`Strg + Umschalt + B`**, um den Build-Task zu starten.
+1. Öffne die Datei `hello64.asm`, um den Quellcode anzuzeigen.
+2. Drücke die Tastenkombination **`Strg + Umschalt + B`**, um den Build-Task zu starten.
 
 Im Terminalfenster siehst du, wie das `make.bat`-Skript ausgeführt wird. Dieses Skript führt die folgenden zwei Schritte aus:
 
@@ -38,3 +38,17 @@ Nach erfolgreichem Build findest du die fertige `hello64.exe` im Projektverzeich
 
 ```shell
 ./hello64.exe
+```
+
+## Funktionsweise & Projektstruktur
+
+Das Programm zeigt eine einfache Windows-Messagebox an.
+
+### 📁 Projektstruktur
+
+Das Repository ist wie folgt aufgebaut, um eine unkomplizierte Nutzung zu gewährleisten:
+
+* **`hello64.asm`**: Die Hauptdatei mit dem 64-Bit-Assembly-Code.
+* **`make.bat`**: Ein einfaches Batch-Skript, das die Build-Befehle ausführt.
+* **`.vscode/tasks.json`**: Die Konfigurationsdatei für den VS Code Build-Task.
+* **`nasm.exe` / `golink.exe`**: Die portablen Build-Tools, die das Projekt autark machen.
