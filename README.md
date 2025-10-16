@@ -1,40 +1,56 @@
-.
+Assembly "Hallo Welt" für Windows x64
+Dieses Repository enthält ein kleines "Hallo Welt"-Programm, geschrieben in 64-Bit Assembly (NASM) für Windows. Es ist so konfiguriert, dass es direkt aus Visual Studio Code heraus kompiliert und ausgeführt werden kann, ohne dass zusätzliche Abhängigkeiten wie Visual Studio oder MSVC++ Build Tools erforderlich sind.
 
 🚀 Erste Schritte: Vom ZIP zum lauffähigen Code
-Hey! Damit du das Projekt bei dir zum Laufen bekommst, folge einfach diesen Schritten. Der Hauptunterschied zwischen dem Ordner, den du bekommen hast, und einem frisch geklonten GitHub-Repo ist, dass bei dir wahrscheinlich schon kompilierte Dateien (.obj, .exe) dabei sind. Die ignorieren wir aber erstmal und bauen alles neu.
+Diese Anleitung hilft dir, das Projekt schnell und einfach zum Laufen zu bringen.
 
-1. Vorbereitung
-Stell sicher, dass du Visual Studio Code installiert hast. Du brauchst keine zusätzlichen C++-Compiler oder riesige Visual Studio-Installationen, da alle notwendigen Tools (NASM-Compiler und GoLink-Linker) direkt in diesem Ordner enthalten sind.
+1. Voraussetzungen
+Stelle sicher, dass du Visual Studio Code installiert hast. Alle notwendigen Build-Tools (NASM-Compiler und GoLink-Linker) sind bereits in diesem Repository enthalten. 
 
-2. Projekt in VS Code öffnen
-Entpacke die ZIP-Datei, die du bekommen hast, in einen Ordner deiner Wahl.
+2. Projekt öffnen
+Klone dieses Repository oder lade es als ZIP-Datei herunter und entpacke es.
 
-Öffne Visual Studio Code und gehe zu Datei > Ordner öffnen.... Wähle den nasm-nonvc Ordner aus.
+Öffne Visual Studio Code.
 
-3. Code kompilieren und ausführen
-Ich habe bereits alles so vorbereitet, dass du den Code mit einem einzigen Befehl bauen kannst.
+Gehe zu Datei > Ordner öffnen... und wähle den nasm-nonvc-Ordner aus. 
 
-Öffne die Datei hello64.asm, um den Code zu sehen.
+3. Kompilieren und Ausführen
+Das Projekt ist mit einem vordefinierten VS Code Task ausgestattet, der den gesamten Build-Prozess automatisiert.
 
-Drücke die Tastenkombination Strg + Umschalt + B.
+Öffne die Datei hello64.asm, um den Quellcode anzuzeigen. 
 
-Daraufhin wird ein sogenannter "Task" ausgeführt. Im Terminalfenster unten siehst du, wie die make.bat-Datei aufgerufen wird.
+Drücke die Tastenkombination Strg + Umschalt + B, um den Build-Task zu starten. 
 
-Dieser Task macht zwei Dinge, wie in der make.bat definiert:
+Im Terminalfenster siehst du, wie das make.bat-Skript ausgeführt wird.  Dieses Skript führt die folgenden zwei Schritte aus:
 
-Kompilieren: nasm -f win64 -Ox hello64.asm – Der NASM-Compiler übersetzt deinen Assembly-Code (hello64.asm) in eine Objektdatei (hello64.obj).
 
-Linken: golink.exe /entry:Start kernel32.dll user32.dll hello64.obj – Der GoLinker verbindet deine Objektdatei mit den notwendigen Windows-Bibliotheken (kernel32.dll und user32.dll), um eine ausführbare Datei (hello64.exe) zu erstellen.
+Kompilieren: Der NASM-Compiler übersetzt den Assembly-Code in eine Objektdatei (.obj). 
 
-Nachdem der Task durchgelaufen ist, findest du im Ordner eine neue hello64.exe. Du kannst sie direkt aus dem Explorer oder über das Terminal in VS Code (./hello64.exe) starten. Sie zeigt eine einfache Windows-Messagebox an.
+Shell
 
-📁 Wichtige Dateien im Projekt
-hello64.asm: Das ist die Hauptdatei mit unserem 64-Bit Assembly-Code. Sie definiert, was das Programm tut – in diesem Fall eine simple Messagebox anzeigen.
+nasm -f win64 -Ox hello64.asm
 
-make.bat: Ein einfaches Skript, das die Befehle zum Kompilieren und Linken enthält. So müssen wir das nicht jedes Mal von Hand ins Terminal tippen.
+Linken: Der GoLinker verbindet die Objektdatei mit den notwendigen Windows-Bibliotheken (kernel32.dll, user32.dll), um eine ausführbare Datei (.exe) zu erstellen. 
 
-.vscode/tasks.json: Diese Datei konfiguriert Visual Studio Code so, dass es weiß, was zu tun ist, wenn du Strg + Umschalt + B drückst. Es sagt VS Code im Grunde nur: "Führe die make.bat aus".
+Shell
 
-nasm.exe und golink.exe: Das sind die eigentlichen Werkzeuge (Compiler und Linker), die wir brauchen. Sie sind direkt im Projektordner, damit du nichts extra installieren musst.
+golink.exe /entry:Start kernel32.dll user32.dll hello64.obj
+Nach erfolgreichem Build findest du die fertige hello64.exe im Projektverzeichnis.  Du kannst sie direkt per Doppelklick oder im VS Code-Terminal ausführen:
 
-Viel Spaß beim Ausprobieren! Wenn etwas nicht klappt, sag einfach Bescheid.
+Shell
+
+./hello64.exe
+Das Programm zeigt eine einfache Windows-Messagebox an. 
+
+📁 Projektstruktur
+
+hello64.asm: Die Hauptdatei mit dem 64-Bit-Assembly-Code. 
+
+
+make.bat: Ein einfaches Batch-Skript, das die Build-Befehle ausführt. 
+
+
+.vscode/tasks.json: Die Konfigurationsdatei für den VS Code Build-Task. 
+
+
+nasm.exe / golink.exe: Die portablen Build-Tools, die das Projekt autark machen.
